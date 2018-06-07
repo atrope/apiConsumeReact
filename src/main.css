@@ -1,0 +1,9 @@
+.site a{
+  text-decoration: none;
+}
+.card-img-top{
+  max-height:360px;
+}
+.pointer{
+  cursor: pointer
+}
