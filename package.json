@@ -1,7 +1,6 @@
 {
-  "name": "react-api-flipflops",
+  "name": "books-api-consumer",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "babel-preset-react": "^6.24.1",
     "babelify": "^8.0.0",
