@@ -8,11 +8,11 @@ import thirdApi from './thirdApi.js';
 import './main.css';
 
 let links = [{"title":'Home',"href":"/"}
-            ,{"title":'First Book',"href":"/book/1"}
+            ,{"title":'First Link',"href":"/book/1"}
             ,{"title":'Second Link',"href":"/book/2/Drama"}];
 
 ReactDOM.render((
-    <BrowserRouter>
+    <BrowserRouter basename="/2017-2018/dcs/dev_39/client_app">
       <div className="site">
         <Navigation links={links}/>
           <div className="container-fluid text-center">

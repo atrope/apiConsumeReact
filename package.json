@@ -1,6 +1,7 @@
 {
   "name": "books-api-consumer",
   "version": "0.1.0",
+  "homepage": "http://shenkar.html5-book.co.il/2017-2018/dcs/dev_39/client_app",
   "dependencies": {
     "babel-preset-react": "^6.24.1",
     "babelify": "^8.0.0",
