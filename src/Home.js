@@ -9,9 +9,7 @@ class Home extends Component {
       books: [],
     };
   }
-
   componentDidMount() {
-    console.log(this.props);
     fetch("https://kindle-book.herokuapp.com/getAll")
     .then(response => response.json())
     .then(data => {
@@ -19,11 +17,10 @@ class Home extends Component {
     })
     .catch(e => console.log('error', e));
   }
-
   render() {
   return (
     <div>
-    <BookList books={this.state.books}/>
+    <BookList books={this.state.books} withLink="true"/>
     </div>
 
   )

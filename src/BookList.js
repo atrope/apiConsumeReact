@@ -1,10 +1,10 @@
 import React from 'react';
 import Book from './Book';
 
-const BookList = ({ books }) => (
+const BookList = ({ books,withLink }) => (
   <div className="col-12">
     <ul className="list-inline">
-      { books && books.map((item, index) => <li  className="col-2 list-inline-item" key={index}> <Book book={item} /> </li> ) }
+      { books && books.map((item, index) => <li  className="col-2 list-inline-item" key={index}> <Book book={item} withlink={withLink} /> </li> ) }
   </ul>
 </div>
   );

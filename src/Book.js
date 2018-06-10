@@ -7,6 +7,7 @@ class Book extends React.Component {
   }
   constructor(props) {
     super(props);
+    if (props.book.title)
     this.state = {
       id : props.book.id,
       category: props.book.title,
@@ -14,14 +15,20 @@ class Book extends React.Component {
       name: this.camelCasetoSpaces(props.book.bookName),
       pages: props.book.bages,
       cover:"https://loading.io/spinners/camera/index.svg",
+      showButton: props.withlink === "true"
+    };
+    else
+    this.state = {
+      id : props.book.id,
+      name: this.camelCasetoSpaces(props.book.bookName),
+      pages:-1,
+      cover:"https://loading.io/spinners/camera/index.svg",
+      showButton: props.withlink === "true"
     };
   }
   componentDidMount() { // Search ISBN code and set cover img url
     let query = encodeURI(this.state.name);
-    //let key = "AIzaSyBXDIDyXKzxZ9xwJXc5iJCUmSmFTszQR4k";
-    //let url = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${key}`;
     let url = `https://www.googleapis.com/books/v1/volumes?q=${query}`;
-    console.log(url);
     fetch(url)
     .then(response => response.json())
     .then(data => {
@@ -30,21 +37,43 @@ class Book extends React.Component {
     })
     .catch(e => {
       this.setState({cover: "https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg"})
-      //console.log('error', e)
     });
   }
   render() {
-    return <Link to={`/book/${this.state.id}`}><div className="card pointer" data-id={this.state.id}>
+    if (this.state.pages===-1)
+    return (<div className="card pointer" data-id={this.state.id}>
+     <img className="card-img-top" src={ this.state.cover } alt={`Cover of book ${this.state.name}`} />
+        <div className="card-body">
+          <h5 className="card-title text-dark">{this.state.name}</h5>
+        </div>
+      </div>);
+    else  if (!this.state.showButton)
+    return (<div className="card pointer" data-id={this.state.id}>
+          <img className="card-img-top" src={ this.state.cover } alt={`Cover of book ${this.state.name}`} />
+            <div className="card-body">
+              <h5 className="card-title text-dark">{this.state.name}</h5>
+                <span className="card-title text-dark">
+                  Downloads: {this.state.downloads}<br/>
+                Category: {this.state.category}<br/>
+                  Pages: {this.state.pages}<br/>
+                </span>
+              </div>
+          </div>);
+    else return (<Link to={`/book/${this.state.id}/${this.state.category}`}>
+          <div className="card pointer" data-id={this.state.id}>
+          <img className="card-img-top" src={ this.state.cover } alt={`Cover of book ${this.state.name}`} />
+            <div className="card-body">
+              <h5 className="card-title text-dark">{this.state.name}</h5>
+                <span className="card-title text-dark">
+                  Downloads: {this.state.downloads}<br/>
+                Category: {this.state.category}<br/>
+                  Pages: {this.state.pages}<br/>
+                </span>
+              <button className="btn btn-primary mt-3">Go to book</button>
+            </div>
+          </div>
+        </Link>);
 
-          <img className="card-img-top" src={ this.state.cover } alt="{`Cover of book ${this.state.name}`}" />
-  <div className="card-body">
-    <h5 className="card-title text-dark">{this.state.name}</h5>
-    <button className="btn btn-primary">Go to book</button>
-  </div>
-</div></Link>
   }
 }
-
-//{id: "1", title: "Action", downloads: "200", bookName: "superMan", bages: "500"}
-//
 export default Book;
