@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Home from './Home';
-import { BrowserRouter,Switch, Route } from 'react-router-dom'
+import { HashRouter,Switch, Route } from 'react-router-dom'
 import Navigation from './Navigation.js';
 import secondApi from './secondApi.js';
 import thirdApi from './thirdApi.js';
@@ -12,7 +12,7 @@ let links = [{"title":'Home',"href":"/"}
             ,{"title":'Second Link',"href":"/book/2/Drama"}];
 
 ReactDOM.render((
-    <BrowserRouter basename="/2017-2018/dcs/dev_39/client_app">
+    <HashRouter>
       <div className="site">
         <Navigation links={links}/>
           <div className="container-fluid text-center">
@@ -23,5 +23,5 @@ ReactDOM.render((
             </Switch>
           </div>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   ), document.getElementById('root'))
