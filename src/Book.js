@@ -25,6 +25,7 @@ class Book extends React.Component {
       cover:"https://loading.io/spinners/camera/index.svg",
       showButton: props.withlink === "true"
     };
+    this.handleDelete = this.handleDelete.bind(this);
   }
   componentDidMount() { // Search ISBN code and set cover img url
     let query = encodeURI(this.state.name);
@@ -39,6 +40,12 @@ class Book extends React.Component {
       this.setState({cover: "https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg"})
     });
   }
+handleDelete(e){
+  var evt = document.createEvent("Events")
+  evt.initEvent("deleteBook", true, true);
+  evt.book = this.state;
+  window.dispatchEvent(evt);
+}
   render() {
     if (this.state.pages===-1)
     return (<div className="card pointer" data-id={this.state.id}>
@@ -59,20 +66,22 @@ class Book extends React.Component {
                 </span>
               </div>
           </div>);
-    else return (<Link to={`/book/${this.state.id}/${this.state.category}`}>
+    else return (
           <div className="card pointer" data-id={this.state.id}>
-          <img className="card-img-top" src={ this.state.cover } alt={`Cover of book ${this.state.name}`} />
+            <Link to={`/book/${this.state.id}/${this.state.category}`}>
+          <img className="card-img-top" src={ this.state.cover } alt={`Cover of book ${this.state.name}`} /></Link>
             <div className="card-body">
-              <h5 className="card-title text-dark">{this.state.name}</h5>
+            <Link to={`/book/${this.state.id}/${this.state.category}`}>    <h5 className="card-title text-dark">{this.state.name}</h5>
                 <span className="card-title text-dark">
                   Downloads: {this.state.downloads}<br/>
                 Category: {this.state.category}<br/>
                   Pages: {this.state.pages}<br/>
-                </span>
-              <button className="btn btn-primary mt-3">Go to book</button>
+                </span></Link>
+                <Link to={`/book/${this.state.id}/${this.state.category}`}><button className="btn btn-primary mt-3">Go to book</button></Link>
+                <button className="btn btn-primary mt-3" onClick={ this.handleDelete }>Delete</button>
             </div>
           </div>
-        </Link>);
+        );
 
   }
 }
