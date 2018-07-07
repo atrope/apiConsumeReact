@@ -9,7 +9,6 @@ class Home extends Component {
       books: [],
     };
     this.deleteBook = this.deleteBook.bind(this);
-
   }
   componentDidMount() {
     window.addEventListener('deleteBook', this.deleteBook);
