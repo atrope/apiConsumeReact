@@ -17,7 +17,7 @@ ReactDOM.render((
         <Navigation links={links}/>
           <div className="container-fluid text-center">
             <Switch>
-              <Route exact path='/' component={Home}/>
+              <Route exact path='/(|index.html)' component={Home}/>
                 <Route exact path='/book/:bookId' component={secondApi}/>
                 <Route path='/book/:bookId/:category' component={thirdApi}/>
             </Switch>
